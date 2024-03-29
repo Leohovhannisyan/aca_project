@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ doctor.firstname }} {{ doctor.lastname }}'s Schedule</title>
+</head>
+<body>
+    <h1>{{ doctor.firstname }} {{ doctor.lastname }}'s Schedule</h1>
+    <ul>
+        {% for hour in all_hours %}
+            {% if hour not in booked_times %}
+                <li>{{ hour }}
+                    <form action="{% url 'book_appointment' doctor.id hour %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="doctor_id" value="{{ doctor.id }}">
+                        <input type="hidden" name="time" value="{{ hour }}">
+                        <button type="submit">Book</button>
+                    </form>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</body>
+</html>

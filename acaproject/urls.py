@@ -15,7 +15,25 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from polls.user import log, register, reg, log_in, user_log_out
+from polls.time_managment import doctor_list, doctor_schedule, book_appointment
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', log, name='log'),
+    path("reg/",reg,name='reg'),
+    path('check/', reg,name="reg"),
+    path("register",register, name ='register'),
+    path("log_in",log_in,name="log_in"),
+    path("user_log_out", user_log_out, name="user_log_out"),
+    path('doctor/', doctor_list, name='doctor_list'),
+    path('doctor/<int:doctor_id>/', doctor_schedule, name='doctor_schedule'),
+    path('doctor/<int:doctor_id>/book/<str:time>/', book_appointment, name='book_appointment'),
 ]
+
+
+
+
+
+
+
+
